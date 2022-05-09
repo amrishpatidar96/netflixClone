@@ -26,17 +26,60 @@ function getFormatedDate(date1){
 	return year+"-"+month+"-"+date;
 }
 
-function fetchAllComingThisWeek(){
-    //this method is for fetching this week movies and tv shows 
+function getWeeksFirstAndLastDate(week){
     let date1 = new Date();
-    let remaindays = 7 - date1.getDay(); ///2
+    let remaindays = 7 - date1.getDay(); 
     let elapseddays = date1.getDay() ;
-    let firstdayOfweek = new Date(Number(date1) - ((24 * 3600 * 1000) * (elapseddays - 1) )) ;
-    let lastdayOfweek = new Date(Number(date1) + ((24 * 3600 * 1000) * remaindays )) ;
-    let firstdayOfweekDate = getFormatedDate(firstdayOfweek) ;
-    let lastdayOfweekDate = getFormatedDate(lastdayOfweek) ;
+    if(week === 'current'){
+        let firstdayOfweek = new Date(Number(date1) - ((24 * 3600 * 1000) * (elapseddays - 1) )) ;
+        let lastdayOfweek = new Date(Number(date1) + ((24 * 3600 * 1000) * remaindays )) ;
+        let dateOfFirstdayOfCurrentWeek = getFormatedDate(firstdayOfweek) ;
+        let dateOfLastdayOfCurrentWeek = getFormatedDate(lastdayOfweek) ;
+        return {
+            dateOfFirstdayOfCurrentWeek,
+            dateOfLastdayOfCurrentWeek
+        };
+    }
+    if(week === 'next'){
+        let firstdayOfweek = new Date((Number(date1)+(24*3600*1000*7)) - ((24 * 3600 * 1000) * (elapseddays - 1) )) ;
+        let lastdayOfweek = new Date((Number(date1)+(24*3600*1000*7)) + ((24 * 3600 * 1000) * remaindays )) ;
+        let dateOfFirstdayOfNextWeek = getFormatedDate(firstdayOfweek) ;
+        let dateOfLastdayOfNextWeek = getFormatedDate(lastdayOfweek) ;
+        return {
+            dateOfFirstdayOfNextWeek,
+            dateOfLastdayOfNextWeek
+        };
 
-    return Api.get('3/discover/movie?api_key='+ApiEndpoints.API_KEY+'&language=en-US&region=IN&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&release_date.gte='+firstdayOfweekDate+'&release_date.lte='+lastdayOfweekDate+'&with_watch_monetization_types=flatrate');
+    }
+    
+
+   
+
 }
 
-export { fetchPopularMovies ,fetchPopularTvShows,fetchAllComingThisWeek}
+
+
+
+
+function fetchAllComingThisWeek(){
+    //this method is for fetching this week movies and tv shows 
+    const {dateOfFirstdayOfCurrentWeek, dateOfLastdayOfCurrentWeek} = getWeeksFirstAndLastDate('current');
+
+    return Api.get('3/discover/movie?api_key='+ApiEndpoints.API_KEY+'&language=en-US&region=IN&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&release_date.gte='+dateOfFirstdayOfCurrentWeek+'&release_date.lte='+dateOfLastdayOfCurrentWeek+'&with_watch_monetization_types=flatrate');
+}
+
+
+
+
+
+
+function fetchAllComingNextWeek(){
+    //this method is for fetching next week movies and tv shows 
+    let {dateOfFirstdayOfNextWeek, dateOfLastdayOfNextWeek} = getWeeksFirstAndLastDate('next');
+    
+    return Api.get('3/discover/movie?api_key='+ApiEndpoints.API_KEY+'&language=en-US&region=IN&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&release_date.gte='+dateOfFirstdayOfNextWeek+'&release_date.lte='+dateOfLastdayOfNextWeek+'&with_watch_monetization_types=flatrate');
+}
+
+
+
+export { fetchPopularMovies ,fetchPopularTvShows,fetchAllComingThisWeek ,fetchAllComingNextWeek}

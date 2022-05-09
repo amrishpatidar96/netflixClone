@@ -1,11 +1,21 @@
-import ApiWrapper from './ApiWrapper' ; 
+import ApiWrapper from "./ApiWrapper";
 
-import * as ApiEndpoints from './ApiEndpoints';
+import * as ApiEndpoints from "./ApiEndpoints";
 
-import {fetchPopularMovies,fetchPopularTvShows,fetchAllComingThisWeek} from './PopularMovies';
+import {
+  fetchPopularMovies,
+  fetchPopularTvShows,
+  fetchAllComingThisWeek,
+  fetchAllComingNextWeek,
+} from "./PopularMovies";
 
-export default ApiWrapper ;
+import { fetchMoviesgenres } from "./Movies";
+export default ApiWrapper;
 export {
-    ApiEndpoints,fetchPopularMovies,fetchPopularTvShows,fetchAllComingThisWeek
-  };
-  
+  ApiEndpoints,
+  fetchPopularMovies,
+  fetchPopularTvShows,
+  fetchAllComingThisWeek,
+  fetchAllComingNextWeek,
+  fetchMoviesgenres,
+};

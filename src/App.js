@@ -6,7 +6,8 @@ import { store } from "./services/ReduxStore";
 import DashboardPage from './pages/DashboardPage'
 import NewandPopular from './pages/NewandPopularPage'
 import Mypage from './pages/MyPage'
-
+import Movies  from './pages/MoviesPage';
+import Tvshows from './pages/TvShowsPage';
 
 
 function App() {
@@ -24,8 +25,8 @@ function App() {
             
               
             <Route path='browse' index element={<Mypage message="Default Dashboard Page" />} exact />
-            <Route path="genre/83" element={<Mypage message="TV Shows Page" />} />
-            <Route path="genre/34399" element={<Mypage message="Movies Page" />} />
+            <Route path="genre/83" element={<Tvshows />} />
+            <Route path="genre/34399" element={<Movies message="Movies Page" />} />
             <Route path="latest" element={<NewandPopular />} />
             <Route path="my-list" element={<Mypage message="My List Page" />} />
               

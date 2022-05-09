@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 
 import { ApiEndpoints } from "../services/Api";
+import SlickCss from './Slick.module.css';
 
-import Card from "./Card";
+import imgNotavailable from '../assets/imgNotavailable.jpeg';
 
 
 
@@ -33,7 +34,7 @@ function SamplePrevArrow(props) {
 
 export default class Slick extends Component {
 
-  state = { showCard : false }
+  
 
   render() {
     var settings = {
@@ -82,23 +83,23 @@ export default class Slick extends Component {
             
           }
         }
-      ]
+      ],
+      
     };
-
+    
     let slides = (<Slider {...settings}>
       {
           this.props.content && this.props.content.length > 0  && this.props.content.map((obj)=>{
-
+              
               return (
-                <img
-                src={ApiEndpoints.IMG_BASE_URL + obj.poster_path}
-                alt="not found"
-                className="h-48 rounded-md object-fill p-1 aspect-square"
-                key={obj.id}
+                <div className={"h-48 "+SlickCss.popup} key={obj.id}  >
+                   <img
+                src={(obj.poster_path !== null )? ApiEndpoints.IMG_BASE_URL + obj.poster_path : imgNotavailable}
+                alt="Not Found"
+                className={"h-full w-full rounded-md p-1 shadow-md object-fill "} 
                 />
-
-           
-          
+                </div>
+                  
             );
 
 

@@ -1,7 +1,7 @@
 
-const INITIAL_STATE = {movies:[],tvshows:[],comingthisweek:[]} ; 
+const INITIAL_STATE = {movies:[],tvshows:[],comingthisweek:[],comingnextweek:[]} ; 
 
-function userReducer(state = INITIAL_STATE, action) {
+function newAndpopular(state = INITIAL_STATE, action) {
     switch (action.type) {
       case 'save_popular_movies':
         return {
@@ -25,11 +25,22 @@ function userReducer(state = INITIAL_STATE, action) {
             ...action.payload
           ]
         }
+      
+      case 'save_coming_next_week_All':
+          return {
+            ...state,
+            comingnextweek:[
+              ...action.payload
+            ]
+          }
+
+
+
 
       default:
         return state;
     }
   }
   
-  export default userReducer;
+  export default newAndpopular;
   
