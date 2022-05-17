@@ -8,9 +8,16 @@ import NewandPopular from './pages/NewandPopularPage'
 import Mypage from './pages/MyPage'
 import Movies  from './pages/MoviesPage';
 import Tvshows from './pages/TvShowsPage';
+import {useParams} from 'react-router-dom';
+import { useEffect } from 'react';
 
+function App(props) {
 
-function App() {
+  let params = useParams() ;
+
+  console.log("params",params);
+
+  
   return (
     <div className="App">
      <Provider store={store}>
@@ -26,7 +33,7 @@ function App() {
               
             <Route path='browse' index element={<Mypage message="Default Dashboard Page" />} exact />
             <Route path="genre/83" element={<Tvshows />} />
-            <Route path="genre/34399" element={<Movies message="Movies Page" />} />
+            <Route path="genre/:id" element={<Movies />} exact/>
             <Route path="latest" element={<NewandPopular />} />
             <Route path="my-list" element={<Mypage message="My List Page" />} />
               

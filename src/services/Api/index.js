@@ -9,7 +9,7 @@ import {
   fetchAllComingNextWeek,
 } from "./PopularMovies";
 
-import { fetchMoviesgenres } from "./Movies";
+import { fetchMoviesgenres ,fetchMoviesBasedOnGenre} from "./Movies";
 export default ApiWrapper;
 export {
   ApiEndpoints,
@@ -18,4 +18,5 @@ export {
   fetchAllComingThisWeek,
   fetchAllComingNextWeek,
   fetchMoviesgenres,
+  fetchMoviesBasedOnGenre
 };

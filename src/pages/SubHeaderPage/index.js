@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { NavLink} from 'react-router-dom'
+
 function SubHeader(props) {
   const [isGenreClicked, setisGenreClicked] = useState(false);
 
@@ -44,11 +46,12 @@ function SubHeader(props) {
               props.genres.map((genre) => {
                 return (
                   <li
-                    value={genre.name}
-                    key={genre.id}
-                    onClick={props.genereChangeHandler.bind(this)}
+                    key={genre.id}    
                   >
-                    {genre.name}
+                    <NavLink 
+                    onClick={props.genereChangeHandler.bind(this,genre.id)}
+                    to={"/genre/"+genre.id}>{genre.name}</NavLink>
+                    
                   </li>
                 );
               })}
